@@ -22,18 +22,11 @@ This plugin allows you to control your ATAG One thermostat through Apple HomeKit
 
 ## Installation
 
-### Method 1: Via Homebridge Config UI (Recommended)
-
-1. Search for "homebridge-atag-one" in the Homebridge Config UI
-2. Install the plugin
-3. Download the ATAG One API JAR file (see setup steps below)
-4. Configure the plugin settings
-
-### Method 2: Manual Installation
+### Method 1: Manual Installation
 
 ```bash
 # Install the plugin
-npm install -g homebridge-atag-one
+npm install -g https://github.com/secbyd/homebridge-atag-one
 
 # Install Java if not already installed
 sudo apt update
