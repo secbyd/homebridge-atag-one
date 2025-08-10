@@ -1,0 +1,36 @@
+{
+  "name": "homebridge-atag-one",
+  "version": "1.0.0",
+  "description": "Homebridge plugin for ATAG One thermostat using kozmoz/atag-one-api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/homebridge-atag-one.git"
+  },
+  "keywords": [
+    "homebridge",
+    "homebridge-plugin",
+    "atag",
+    "thermostat",
+    "heating",
+    "homekit"
+  ],
+  "engines": {
+    "node": ">=14.18.1",
+    "homebridge": ">=1.3.0"
+  },
+  "author": "Your Name",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/homebridge-atag-one/issues"
+  },
+  "homepage": "https://github.com/your-username/homebridge-atag-one#readme",
+  "peerDependencies": {
+    "homebridge": ">=1.3.0"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}
