@@ -1,0 +1,166 @@
+{
+  "pluginAlias": "ATAGOne",
+  "pluginType": "accessory",
+  "singular": false,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "title": "Name",
+        "type": "string",
+        "default": "ATAG One Thermostat",
+        "required": true,
+        "description": "Name of the thermostat as it appears in HomeKit"
+      },
+      "mode": {
+        "title": "Connection Mode",
+        "type": "string",
+        "default": "local",
+        "enum": ["local", "remote"],
+        "required": true,
+        "description": "Local mode connects directly to the thermostat IP, remote mode uses ATAG portal"
+      },
+      "host": {
+        "title": "Host/IP Address",
+        "type": "string",
+        "format": "ipv4",
+        "condition": {
+          "functionBody": "return model.mode === 'local';"
+        },
+        "description": "IP address of your ATAG One thermostat (required for local mode)"
+      },
+      "email": {
+        "title": "Email",
+        "type": "string",
+        "format": "email",
+        "condition": {
+          "functionBody": "return model.mode === 'remote';"
+        },
+        "description": "Your ATAG portal email address (required for remote mode)"
+      },
+      "password": {
+        "title": "Password",
+        "type": "string",
+        "condition": {
+          "functionBody": "return model.mode === 'remote';"
+        },
+        "description": "Your ATAG portal password (required for remote mode)"
+      },
+      "jarPath": {
+        "title": "ATAG JAR File Path",
+        "type": "string",
+        "default": "/usr/local/lib/node_modules/homebridge-atag-one/atag-one.jar",
+        "required": true,
+        "description": "Full path to the atag-one.jar file"
+      },
+      "javaPath": {
+        "title": "Java Executable Path",
+        "type": "string",
+        "default": "java",
+        "required": true,
+        "description": "Path to the Java executable (usually just 'java')"
+      },
+      "pollInterval": {
+        "title": "Poll Interval (seconds)",
+        "type": "integer",
+        "default": 60,
+        "minimum": 10,
+        "maximum": 3600,
+        "description": "How often to poll the thermostat for updates (in seconds)"
+      },
+      "timeout": {
+        "title": "Command Timeout (seconds)",
+        "type": "integer",
+        "default": 30,
+        "minimum": 5,
+        "maximum": 120,
+        "description": "Timeout for ATAG API commands (in seconds)"
+      },
+      "minTemp": {
+        "title": "Minimum Temperature",
+        "type": "number",
+        "default": 5,
+        "minimum": 0,
+        "maximum": 15,
+        "description": "Minimum temperature that can be set"
+      },
+      "maxTemp": {
+        "title": "Maximum Temperature",
+        "type": "number",
+        "default": 30,
+        "minimum": 20,
+        "maximum": 35,
+        "description": "Maximum temperature that can be set"
+      },
+      "temperatureDisplayUnits": {
+        "title": "Temperature Display Units",
+        "type": "integer",
+        "default": 0,
+        "enum": [0, 1],
+        "enumNames": ["Celsius", "Fahrenheit"],
+        "description": "Temperature units to display in HomeKit"
+      },
+      "exposeOutsideTemperature": {
+        "title": "Expose Outside Temperature Sensor",
+        "type": "boolean",
+        "default": false,
+        "description": "Add a separate temperature sensor for outside temperature"
+      },
+      "exposeDHWTemperature": {
+        "title": "Expose Hot Water Temperature Sensor",
+        "type": "boolean",
+        "default": false,
+        "description": "Add a separate temperature sensor for domestic hot water"
+      },
+      "exposeWaterPressure": {
+        "title": "Expose Water Pressure Sensor",
+        "type": "boolean",
+        "default": false,
+        "description": "Add a leak sensor that triggers when water pressure is low"
+      }
+    }
+  },
+  "form": [
+    "name",
+    "mode",
+    {
+      "key": "host",
+      "condition": "model.mode === 'local'"
+    },
+    {
+      "key": "email",
+      "condition": "model.mode === 'remote'"
+    },
+    {
+      "key": "password",
+      "type": "password",
+      "condition": "model.mode === 'remote'"
+    },
+    {
+      "type": "fieldset",
+      "title": "Advanced Settings",
+      "expandable": true,
+      "expanded": false,
+      "items": [
+        "jarPath",
+        "javaPath",
+        "pollInterval",
+        "timeout",
+        "minTemp",
+        "maxTemp",
+        "temperatureDisplayUnits"
+      ]
+    },
+    {
+      "type": "fieldset",
+      "title": "Additional Sensors",
+      "expandable": true,
+      "expanded": false,
+      "items": [
+        "exposeOutsideTemperature",
+        "exposeDHWTemperature",
+        "exposeWaterPressure"
+      ]
+    }
+  ]
+}
